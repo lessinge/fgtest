@@ -1,0 +1,12 @@
+<!-- Intro -->
+<section id="{{ .section.section_id }}" class="special">
+    <header class="major">
+        <h2>{{ .section.title }}</h2>
+        {{ partial "markdownify-block" .section.subtitle }}
+    </header>
+    <ul class="icons large series">
+        {{ range $item := .section.icons }}
+            <li class="icon {{ $item.icon }}"></li>
+        {{ end }}
+    </ul>
+</section>

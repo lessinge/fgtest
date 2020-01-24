@@ -1,0 +1,25 @@
+<!-- Features -->
+<section id="{{ .section.section_id }}" class="special">
+    <header class="major">
+        <h2>{{ .section.title }}</h2>
+        {{ partial "markdownify-block" .section.subtitle }}
+    </header>
+    <section class="features">
+        {{ range $feature := .section.features }}
+            <section>
+                <span class="icon major {{ $feature.icon }}"></span>
+                <h3>{{ $feature.title }}</h3>
+                {{ partial "markdownify-block" $feature.text }}
+            </section>
+        {{ end }}
+    </section>
+    {{ if .section.actions }}
+        <footer class="major">
+            <ul class="actions special">
+                {{ range $action := .section.actions }}
+                    <li><a href="{{ if strings.HasPrefix $action.url "#" }}{{ $action.url }}{{ else }}{{ $action.url | relURL }}{{ end }}" class="button{{ if $action.is_primary }} primary{{ end }}{{ if $action.is_scrolly }} scrolly{{ end }}">{{ $action.label }}</a></li>
+                {{ end }}
+            </ul>
+        </footer>
+    {{ end }}
+</section>

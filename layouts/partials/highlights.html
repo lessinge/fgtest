@@ -1,0 +1,24 @@
+<!-- Highlights -->
+<section id="{{ .section.section_id }}" class="highlights">
+    {{ range $section_page := (where (where (where ((.Site.GetPage "section" "/").Pages) "Params.home" "!=" nil) "Params.home.highlights" "!=" nil) "Params.home.highlights.enabled" true).ByParam "home.highlights.weight" }}
+        {{ if or (gt $section_page.Params.home.highlights.weight 0) (lt $section_page.Params.home.highlights.weight 1) }}
+            <section>
+                {{ if $section_page.Params.home.highlights.home_img }}
+                    <a class="image" href="{{ $section_page.URL }}">
+                        <img src="{{ $section_page.Params.home.highlights.home_img.path | relURL }}" data-position="{{ $section_page.Params.home.highlights.home_img.data_position }}" alt="" />
+                    </a>
+                {{ end }}
+                <div class="content">
+                    <header class="major">
+                        <h2>{{ $section_page.Title }}</h2>
+                        {{ partial "markdownify-block" $section_page.Params.subtitle }}
+                    </header>
+                    {{ partial "markdownify-block" $section_page.Params.home.highlights.excerpt }}
+                    <ul class="actions">
+                        <li><a href="{{ $section_page.URL }}" class="button">Learn More</a></li>
+                    </ul>
+                </div>
+            </section>
+        {{ end }}
+    {{ end }}
+</section>

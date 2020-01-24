@@ -1,0 +1,16 @@
+<!-- CTA -->
+<section id="cta" class="wrapper {{ .Params.cta.background_style }} special">
+    <div class="inner">
+        <header class="major">
+            <h2>{{ .Params.cta.title }}</h2>
+            {{ partial "markdownify-block" .Params.cta.text }}
+        </header>
+        {{ if .Params.cta.actions }}
+            <ul class="actions special">
+                {{ range $action := .Params.cta.actions }}
+                    <li><a href="{{ if strings.HasPrefix $action.url "#" }}{{ $action.url }}{{ else }}{{ $action.url | relURL }}{{ end }}" class="button{{ if $action.is_primary }} primary{{ end }}{{ if $action.is_scrolly }} scrolly{{ end }}">{{ $action.label }}</a></li>
+                {{ end }}
+            </ul>
+        {{ end }}
+    </div>
+</section>

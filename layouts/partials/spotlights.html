@@ -1,0 +1,21 @@
+<!-- Spotlights -->
+<section id="{{ .section.section_id }}" class="spotlights special">
+    {{ range $section_page := (where (where (where ((.Site.GetPage "section" "/").Pages) "Params.home" "!=" nil) "Params.home.spotlights" "!=" nil) "Params.home.spotlights.enabled" true).ByParam "home.spotlights.weight" }}
+        {{ if or (gt $section_page.Params.home.spotlights.weight 0) (lt $section_page.Params.home.spotlights.weight 1) }}
+            <section>
+                <header class="major">
+                    <h3>{{ $section_page.Title }}</h3>
+                </header>
+                {{ if $section_page.Params.home.spotlights.home_img_path }}
+                    <div class="image fit">
+                        <img src="{{ $section_page.Params.home.spotlights.home_img_path }}" alt="" />
+                    </div>
+                {{ end }}
+                {{ partial "markdownify-block" $section_page.Params.home.spotlights.excerpt }}
+                <ul class="actions special">
+                    <li><a href="{{ $section_page.URL }}" class="button">Learn More</a></li>
+                </ul>
+            </section>
+        {{ end }}
+    {{ end }}
+</section>

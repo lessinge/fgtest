@@ -1,0 +1,28 @@
+{{ define "content" }}
+
+    {{ if .Params.display_header }}
+        <!-- Header -->
+        <header id="header">
+            <h1>{{ .Site.Title }}</h1>
+        </header>
+    {{ end }}
+    
+    <!-- Main -->
+    <section id="main" class="wrapper alt">
+        <div class="inner">
+            
+            <header class="major special">
+                <h2>{{ .Title }}</h2>
+                {{ partial "markdownify-block" .Params.subtitle }}
+            </header>
+            
+            {{ if .Params.content_img }}
+                <a href="#" class="image fit"><img src="{{ .Params.content_img | relURL }}" alt="" /></a>
+            {{ end }}
+            
+            {{ .Content }}
+            
+        </div>
+    </section>
+
+{{ end }}
